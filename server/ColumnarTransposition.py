@@ -40,7 +40,7 @@ class ColumnarTransposition:
 
 x = ColumnarTransposition()
 key = '2,1,3,4'
-ans = x.encode('abcdefj', key)
+ans = x.encode('abc Ddefj', key)
 print('encode : ', ans)
 ans = x.decode(ans, key)
 print('decode : ', ans)
