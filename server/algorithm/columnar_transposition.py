@@ -7,8 +7,10 @@ class ColumnarTransposition:
     def getKey(self, key):
         return np.array([int(i) for i in key.split(',')])
 
-    def encode(self, plan_text, key='1,2,3'):
+    def encrypt(self, plan_text: str, key: str = '1,2,3'):
+        # print(type(self))
         key = self.getKey(key) - 1  # num of col
+        # print(key)
         p = list(plan_text)
 
         n = len(key)
@@ -21,7 +23,7 @@ class ColumnarTransposition:
 
         return ''.join(c)
 
-    def decode(self, cipher_text, key='1,2,3'):
+    def decrypt(self, cipher_text: str, key: str = '1,2,3'):
         key = self.getKey(key) - 1  # num of col
         c = list(cipher_text)
         n = len(key)
@@ -37,10 +39,3 @@ class ColumnarTransposition:
 
         return ''.join(p)
 
-
-x = ColumnarTransposition()
-key = '2,1,3,4'
-ans = x.encode('abc Ddefj', key)
-print('encode : ', ans)
-ans = x.decode(ans, key)
-print('decode : ', ans)
