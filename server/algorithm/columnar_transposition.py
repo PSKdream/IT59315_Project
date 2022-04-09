@@ -4,12 +4,14 @@ import math
 
 class ColumnarTransposition:
 
-    def getKey(self, key):
+    def __init__(self):
+        pass
+
+    def get_key(self, key):
         return np.array([int(i) for i in key.split(',')])
 
     def encrypt(self, plan_text: str, key: str = '1,2,3'):
-        # print(type(self))
-        key = self.getKey(key) - 1  # num of col
+        key = self.get_key(key) - 1  # num of col
         # print(key)
         p = list(plan_text)
 
@@ -24,7 +26,7 @@ class ColumnarTransposition:
         return ''.join(c)
 
     def decrypt(self, cipher_text: str, key: str = '1,2,3'):
-        key = self.getKey(key) - 1  # num of col
+        key = self.get_key(key) - 1  # num of col
         c = list(cipher_text)
         n = len(key)
         m = math.ceil(len(c) / n)
@@ -35,7 +37,5 @@ class ColumnarTransposition:
                 c.insert(((n - ind) * m) - 1, '')
 
         c = np.reshape(c, (-1, n), order='F')
-        p = c[:, key].flatten()
-
+        p = c[:, np.argsort(key)].flatten()
         return ''.join(p)
-

@@ -58,20 +58,23 @@ class RSA:
         plainText = self.encrypt(key, cipher_text)
         return plainText
 
-
-rsa = RSA()
-correct = 0
-for _ in range(100):
-    text = "wertyuio;kjhgfxc vblkjfdw345 67iop;l,bvgyu"
-    publicKey, privateKey = rsa.generateKey()
-    # print("publicKey ", publicKey)
-    # print("privateKey ", privateKey)
-    en = rsa.encrypt(publicKey, text)
-    de = rsa.decrypt(privateKey, en)
-    if text == de:
-        correct += 1
-    else:
-        print("publicKey ", publicKey)
-        print("privateKey ", privateKey)
-
-print('Acc: ', correct / 100)
+print(int('0x7672002f5fc944d65b273d852c179b84a87c8db474ca31ed2675dbc0038ca4b1',0))
+# rsa = RSA()
+# publicKey, privateKey = rsa.generateKey()
+# print(publicKey[0])
+# print(str(publicKey[0]), int(str(publicKey[0]), 16))
+# correct = 0
+# for _ in range(100):
+#     text = "wertyuio;kjhgfxc vblkjfdw345 67iop;l,bvgyu"
+#     publicKey, privateKey = rsa.generateKey()
+#     # print("publicKey ", publicKey)
+#     # print("privateKey ", privateKey)
+#     en = rsa.encrypt(publicKey, text)
+#     de = rsa.decrypt(privateKey, en)
+#     if text == de:
+#         correct += 1
+#     else:
+#         print("publicKey ", publicKey)
+#         print("privateKey ", privateKey)
+#
+# print('Acc: ', correct / 100)
