@@ -1,6 +1,7 @@
 class Vigenere:
 
     def encrypt(self, plan_text: str, key: str):
+
         if plan_text is None and key is None:
             raise Exception('Data is None')
         c = ''
