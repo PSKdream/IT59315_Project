@@ -1,14 +1,14 @@
 import random
 import math
 import sympy
-
+import hashlib
 
 class RSA:
-    primeNumber = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
-                   67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
-                   157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241,
-                   251, 257]
-
+    primeNumber = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59,
+                   61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127,
+                   131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191,
+                   193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257,
+                   263, 269, 271]
     def __init__(self):
         pass
 
@@ -21,8 +21,8 @@ class RSA:
 
     def verify(self, public_key, private_key):
         text = 'Test key 1234'
-        enc = rsa.encrypt(public_key, text)
-        dec = rsa.decrypt(private_key, enc)
+        enc = self.encrypt(text, public_key)
+        dec = self.decrypt(enc, private_key)
         if text == dec:
             return True
         return False
@@ -34,7 +34,6 @@ class RSA:
         n = p * q
         # ϕ(n) = ( p -1) x (q -1)
         phi = (p - 1) * (q - 1)
-
         prime_e = self.getPrime(2, phi)
         e = random.choice(prime_e)
         while math.gcd(phi, e) != 1:
@@ -47,21 +46,21 @@ class RSA:
         else:
             return self.generateKey()
 
-    def encrypt(self, key, plain_text):
+    def encrypt(self, plain_text, key):
         e, n = key
         cipherText = ""
         for i in range(len(plain_text)):
             cipherText += chr(((ord(plain_text[i]) ** e) % n))
         return cipherText
 
-    def decrypt(self, key, cipher_text):
-        plainText = self.encrypt(key, cipher_text)
+    def decrypt(self, cipher_text, key):
+        plainText = self.encrypt(cipher_text, key)
+        print(plainText)
         return plainText
 
-print(int('0x7672002f5fc944d65b273d852c179b84a87c8db474ca31ed2675dbc0038ca4b1',0))
+
 # rsa = RSA()
 # publicKey, privateKey = rsa.generateKey()
-# print(publicKey[0])
 # print(str(publicKey[0]), int(str(publicKey[0]), 16))
 # correct = 0
 # for _ in range(100):

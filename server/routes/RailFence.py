@@ -1,19 +1,18 @@
 import sys
 from fastapi import APIRouter
-from schemas.ColumnarTransposition import ColumnarTransposition as schema
+from schemas.RailFence import RailFence as schema
 
 sys.path.append("../")
 import algorithm
 
 route = APIRouter()
-obj = algorithm.ColumnarTransposition()
+obj = algorithm.RailFence()
 
-
-@route.post('/ColumnarTransposition/encrypt')
+@route.post('/RailFence/encrypt')
 async def encrypt(cts: schema):
     return obj.encrypt(cts.text, cts.key)
 
 
-@route.post('/ColumnarTransposition/decrypt')
+@route.post('/RailFence/decrypt')
 async def encrypt(cts: schema):
     return obj.decrypt(cts.text, cts.key)
