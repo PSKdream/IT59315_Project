@@ -24,19 +24,12 @@
 
 <script>
 export default {
-  name: "App",
-
   data: () => ({
     links: [
       { text: "Columnar Transposition", route: "/" },
       { text: "Vigenere Cipher", route: "/VigenereCipher" },
       { text: "Unknown Cipher", route: "/UnknownChpher" },
       { text: "RSA", route: "/RSA" },
-    ],
-    items: [
-      ["mdi-email", "Inbox"],
-      ["mdi-account-supervisor-circle", "Supervisors"],
-      ["mdi-clock-start", "Clock-in"],
     ],
   }),
 };
