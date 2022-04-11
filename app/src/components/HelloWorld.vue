@@ -1,45 +1,26 @@
 <template>
-<nav>
-  <v-app>
-    <v-app-bar class="d-flax align-center" app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="black"></v-app-bar-nav-icon>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>Cryptography Project</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+  <nav>
+    <v-app>
+      <v-app-bar class="d-flax align-center" app color="primary">
+        <v-spacer></v-spacer>
+        <v-toolbar-title>Cryptography Project</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app absolutem bottom temporary>
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-orange--text text--accent-1"
-        >
-          <v-list-item>
-            <v-list-item-title>Columnar Transposition</v-list-item-title>
+      <v-navigation-drawer app class="sidebar">
+        <v-list>
+          <v-list-item v-for="link in links" :key="link" link router :to="link.route" >
+            <v-list-item-content>
+              <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 
-          <v-list-item>
-            <v-list-item-title>Vigenere Cipher</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Unknown Cipher</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>RSA</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
+      <v-main>
+        <router-view />
+      </v-main>
+    </v-app>
   </nav>
 </template>
 
@@ -48,7 +29,17 @@ export default {
   name: "App",
 
   data: () => ({
-    drawer: false
+    links: [
+      { text: "Columnar Transposition", route: "/" },
+      { text: "Vigenere Cipher", route: "/VigenereCipher" },
+      { text: "Unknown Cipher", route: "/UnknownChpher" },
+      { text: "RSA", route: "/RSA" },
+    ],
+    items: [
+      ["mdi-email", "Inbox"],
+      ["mdi-account-supervisor-circle", "Supervisors"],
+      ["mdi-clock-start", "Clock-in"],
+    ],
   }),
 };
 </script>

@@ -1,22 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import ColumnarTransposition from '../views/ColumnarTransposition.vue'
+import VigenereCipher from '../views/VigenereCipher'
+import UnknownChpher from '../views/UnknownChpher'
+import RSA from '../views/RSA'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Columnar Transposition',
+    component: ColumnarTransposition
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/VigenereCipher',
+    name: 'VigenereCipher',
+    component: VigenereCipher
+  },
+  {
+    path: '/UnknownChpher',
+    name: 'UnknownChpher',
+    component: UnknownChpher
+  },
+  {
+    path: '/RSA',
+    name: 'RSA',
+    component: RSA
   }
 ]
 
