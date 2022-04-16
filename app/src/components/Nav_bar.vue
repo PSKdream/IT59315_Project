@@ -28,7 +28,7 @@ export default {
     links: [
       { text: "Columnar Transposition", route: "/" },
       { text: "Vigenere Cipher", route: "/VigenereCipher" },
-      { text: "Unknown Cipher", route: "/UnknownChpher" },
+      { text: "Rail Fence Cipher", route: "/UnknownChpher" },
       { text: "RSA", route: "/RSA" },
     ],
   }),

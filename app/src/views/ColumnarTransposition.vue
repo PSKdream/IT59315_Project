@@ -22,21 +22,11 @@
         disabled
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
-        <v-btn 
-          color="#0061BB" 
-          class="mr-4 white--text"
-          width="265"
-          height="50"
-        >
-        Encrypt
+        <v-btn class="mr-4 white--text encrypt" width="265" height="50">
+          Encrypt
         </v-btn>
-        <v-btn
-          color="#FF4D4D"
-          class="mr-4 white--text"
-          width="265"
-          height="50"
-        >
-        Decrypt
+        <v-btn class="mr-4 white--text decrypt" width="265" height="50">
+          Decrypt
         </v-btn>
       </v-row>
     </v-card>
@@ -44,7 +34,26 @@
 </template>
 
 <script>
-  export default {
-  }
+import {HTTP} from '@/axios.js'
+export default {
+  data() {
+    return {
+      text: "",
+      value:"",
+    };
+  },
+  methods: {
+    async getImage() {
+      await HTTP.get("api/breeds/image/random")
+        .then((res) => {
+          if (res.data.status == "success") {
+            this.image = res.data.message;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+  },
+};
 </script>
-+

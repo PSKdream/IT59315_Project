@@ -9,8 +9,8 @@ export default new Vuetify({
         light: {
           primary: '#FF9E45',
           secondary: '#b0bec5',
-          accent: '#8c9eff',
-          error: '#b71c1c',
+          decrypt: '#FF4D4D',
+          encrypt: '#0061BB',
           sidebar: '#45413B',
         },
       },
