@@ -89,7 +89,7 @@ class RSA:
         return plainText
 
 # rsa = RSA()
-# publicKey, privateKey = rsa.generateKey(128)
+# publicKey, privateKey = rsa.generateKey(1024)
 # print(publicKey, privateKey)
 # n = rsa.encrypt("te xt 12", publicKey)
 # n = rsa.decrypt(n, privateKey)

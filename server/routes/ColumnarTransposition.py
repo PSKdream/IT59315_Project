@@ -11,9 +11,15 @@ obj = algorithm.ColumnarTransposition()
 
 @route.post('/ColumnarTransposition/encrypt')
 async def encrypt(cts: schema):
-    return obj.encrypt(cts.text, cts.key)
+    try:
+        return obj.encrypt(cts.text, cts.key)
+    except Exception as e:
+        return e
 
 
 @route.post('/ColumnarTransposition/decrypt')
 async def decrypt(cts: schema):
-    return obj.decrypt(cts.text, cts.key)
+    try:
+        return obj.decrypt(cts.text, cts.key)
+    except Exception as e:
+        return e
