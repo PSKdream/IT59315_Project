@@ -13,11 +13,11 @@ async def encrypt(cts: schema):
     try:
         return obj.encrypt(cts.text, cts.key)
     except Exception as e:
-        return e
+        return str(e)
 
 @route.post('/Vigenere/decrypt')
 async def decrypt(cts: schema):
     try:
         return obj.decrypt(cts.text, cts.key)
     except Exception as e:
-        return e
+        return str(e)

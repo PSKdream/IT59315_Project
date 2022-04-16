@@ -22,7 +22,7 @@ async def generateKey(cts: KeySize):
                     'private_key': private_key}
         return obj_json
     except Exception as e:
-        return e
+        return str(e)
 
 
 @route.post('/RSA/encrypt')
@@ -30,17 +30,17 @@ async def encrypt(cts: schema):
     try:
         key = json.loads(base64.b64decode(cts.key).decode())
         message = obj.encrypt(cts.text, key)
-        message_bytes = message.encode()
+        message_bytes = str(message).encode()
         text = base64.b64encode(message_bytes)
         return text
     except Exception as e:
-        return e
+        return str(e)
 
 @route.post('/RSA/decrypt')
 async def decrypt(cts: schema):
     try:
         key = json.loads(base64.b64decode(cts.key).decode())
         message = base64.b64decode(cts.text).decode()
-        return obj.decrypt(message, key)
+        return str(obj.decrypt(int(message), key))
     except Exception as e:
-        return e
+        return str(e)
