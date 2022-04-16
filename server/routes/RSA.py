@@ -1,7 +1,9 @@
 import sys
 from fastapi import APIRouter
 from schemas.RSA import RSA as schema
+from schemas.RSA import KeySize
 import base64
+import json
 
 sys.path.append("../")
 import algorithm
@@ -9,16 +11,20 @@ import algorithm
 route = APIRouter()
 obj = algorithm.RSA()
 
-@route.get('/RSA/GenerateKey')
-async def encrypt():
-    key = obj.generateKey()
-    json = {'public_key': key[0],
-            'private_key': key[1]}
-    return json
+
+@route.post('/RSA/GenerateKey')
+async def encrypt(cts: KeySize):
+    public_key, private_key = obj.generateKey(cts.keySize)
+    public_key = base64.b64encode(json.dumps(public_key).encode())
+    private_key = base64.b64encode(json.dumps(private_key).encode())
+    obj_json = {'public_key': public_key,
+                'private_key': private_key}
+    return obj_json
+
 
 @route.post('/RSA/encrypt')
 async def encrypt(cts: schema):
-    key = [int(i)for i in cts.key[1:-1].split(',')]
+    key = json.loads(base64.b64decode(cts.key).decode())
     message = obj.encrypt(cts.text, key)
     message_bytes = message.encode()
     text = base64.b64encode(message_bytes)
@@ -26,7 +32,7 @@ async def encrypt(cts: schema):
 
 
 @route.post('/RSA/decrypt')
-async def encrypt(cts: schema):
-    key = [int(i)for i in cts.key[1:-1].split(',')]
+async def decrypt(cts: schema):
+    key = json.loads(base64.b64decode(cts.key).decode())
     message = base64.b64decode(cts.text).decode()
     return obj.decrypt(message, key)

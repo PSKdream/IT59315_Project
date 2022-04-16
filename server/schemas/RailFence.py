@@ -1,4 +1,14 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+
 class RailFence(BaseModel):
-    text: str
-    key: int
+    text: str = Field(..., description="Add text")
+    key: int = Field(..., description="Add key")
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "text": "fuck you",
+                "key": 3
+            }
+        }
