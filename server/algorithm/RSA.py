@@ -22,12 +22,15 @@ class RSA:
         return arr
 
     def verify(self, publicKey, privateKey):
-        text = 'text 123'
-        n = self.encrypt(text, publicKey)
-        dec = self.decrypt(n, privateKey)
-        if text == dec:
-            return True
-        return False
+        try:
+            text = 'text 123'
+            n = self.encrypt(text, publicKey)
+            dec = self.decrypt(n, privateKey)
+            if text == dec:
+                return True
+            return False
+        except:
+            return False
 
     def generateLargePrime(self, keysize=32):
         while True:
@@ -91,8 +94,10 @@ class RSA:
 # rsa = RSA()
 # publicKey, privateKey = rsa.generateKey(1024)
 # print(publicKey, privateKey)
-# n = rsa.encrypt("te xt 12", publicKey)
+# text = 'From the augmentation, a total of 1,225 images were obtained and were divided into 858 training sets, 245 valid sets, and 122 test sets. The images training set are used to train YOLO-X and YOLO-R mod'
+# n = rsa.encrypt(text, publicKey)
 # n = rsa.decrypt(n, privateKey)
+# print(n==text)
 # x = rsa.verify(publicKey, privateKey)
 # print(str(publicKey[0]), int(str(publicKey[0]), 16))
 # correct = 0
