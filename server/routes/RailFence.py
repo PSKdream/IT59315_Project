@@ -14,5 +14,5 @@ async def encrypt(cts: schema):
 
 
 @route.post('/RailFence/decrypt')
-async def encrypt(cts: schema):
+async def decrypt(cts: schema):
     return obj.decrypt(cts.text, cts.key)
