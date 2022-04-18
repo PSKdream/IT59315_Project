@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <v-app-bar class="align-center" app colaxor="primary">
+      <v-app-bar class="align-center" app color="primary">
         <v-spacer></v-spacer>
         <v-toolbar-title>Cryptography Project</v-toolbar-title>
         <v-spacer></v-spacer>

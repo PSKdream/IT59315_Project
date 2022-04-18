@@ -43,8 +43,8 @@ export default {
     };
   },
   methods: {
-    async getImage() {
-      await HTTP.get("api/breeds/image/random")
+    async postText() {
+      await HTTP.post("api/breeds/image/random")
         .then((res) => {
           if (res.data.status == "success") {
             this.image = res.data.message;
