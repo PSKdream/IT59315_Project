@@ -23,7 +23,6 @@
 </template>
 
 <script>
-// import {HTTP} from '@/axios.js'
 export default {
   data: () => ({
     links: [

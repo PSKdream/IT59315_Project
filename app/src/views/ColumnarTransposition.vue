@@ -32,7 +32,6 @@
         </v-btn>
       </v-row>
     </v-card>
-    <img :src="image">
   </div>
 </template>
 
@@ -41,7 +40,6 @@ import {HTTP} from '@/axios.js'
 export default {
   data() {
     return {
-      image: '',
       value: {      
         text: "",
         key:""
@@ -50,19 +48,10 @@ export default {
   },
   methods: {
     async postValue() {
-      await HTTP.get('api/breeds/image/random')
-      .then(res => {
-      if (res.data.status == 'success') {
-      this.image = res.data.message
-      console.log(this.image);
-      }
-      })
-      .catch(e => {
-      console.log(e);
-      });
-      // let getnaja = await HTTP.get("/");
+      debugger
+      let getnaja = await HTTP.get("/");
       // let res = await HTTP.post("/ColumnarTransposition/encrypt", this.value);
-      // console.log(getnaja);
+      console.log(getnaja);
       // console.log(res);
     },
     PostText(e){
