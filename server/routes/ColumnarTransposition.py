@@ -9,7 +9,7 @@ route = APIRouter()
 obj = algorithm.ColumnarTransposition()
 
 
-@route.post('/ColumnarTransposition/encrypt')
+@route.post('/api/ColumnarTransposition/encrypt')
 async def encrypt(cts: schema):
     try:
         return obj.encrypt(cts.text, cts.key)
@@ -17,7 +17,7 @@ async def encrypt(cts: schema):
         return str(e)
 
 
-@route.post('/ColumnarTransposition/decrypt')
+@route.post('/api/ColumnarTransposition/decrypt')
 async def decrypt(cts: schema):
     try:
         return obj.decrypt(cts.text, cts.key)

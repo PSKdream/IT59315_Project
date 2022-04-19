@@ -12,7 +12,7 @@ route = APIRouter()
 obj = algorithm.RSA()
 
 
-@route.post('/RSA/GenerateKey')
+@route.post('/api/RSA/GenerateKey')
 async def generateKey(cts: KeySize):
     try:
         public_key, private_key = obj.generateKey(cts.keySize)
@@ -25,7 +25,7 @@ async def generateKey(cts: KeySize):
         return str(e)
 
 
-@route.post('/RSA/encrypt')
+@route.post('/api/RSA/encrypt')
 async def encrypt(cts: schema):
     try:
         key = json.loads(base64.b64decode(cts.key).decode())
@@ -36,7 +36,7 @@ async def encrypt(cts: schema):
     except Exception as e:
         return str(e)
 
-@route.post('/RSA/decrypt')
+@route.post('/api/RSA/decrypt')
 async def decrypt(cts: schema):
     try:
         key = json.loads(base64.b64decode(cts.key).decode())

@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import {HTTP} from '@/axios.js'
 export default {
   data() {
     return {
@@ -48,11 +47,6 @@ export default {
   },
   methods: {
     async postValue() {
-      debugger
-      let getnaja = await HTTP.get("/");
-      // let res = await HTTP.post("/ColumnarTransposition/encrypt", this.value);
-      console.log(getnaja);
-      // console.log(res);
     },
     PostText(e){
       debugger
