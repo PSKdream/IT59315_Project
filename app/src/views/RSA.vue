@@ -7,10 +7,15 @@
         auto-grow
         :counter="200"
         :rules="inputRules"
-
         label="Input plain text"
         class="mx-4 mt-4"
       ></v-textarea>
+      <v-select
+        :items="items"
+        filled
+        label="Key Size (Bits)"
+        class="mx-4 mt-2"
+      ></v-select>
       <v-textarea
         filled
         auto-grow
@@ -22,7 +27,7 @@
         auto-grow
         label="Result"
         class="mx-4"
-        disabled
+        readonly
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
         <v-btn class="mr-4 white--text encrypt" width="265" height="50">
@@ -42,7 +47,8 @@ export default {
     return {
       inputRules: [
           v => (v || '' ).length <= 200 || 'Plain text must be 200 characters or less.'
-      ]
+      ],
+      items: ['512', '1024', '2048', '4096'],
     }
   },
 };

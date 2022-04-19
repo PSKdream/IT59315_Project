@@ -19,7 +19,7 @@
         auto-grow
         label="Result"
         class="mx-4"
-        disabled
+        readonly
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
         <v-btn class="mr-4 white--text encrypt" width="265" height="50">

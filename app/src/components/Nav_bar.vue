@@ -1,12 +1,12 @@
 <template>
     <v-app>
-      <v-app-bar class="align-center" app color="primary">
+      <v-app-bar app class="align-center" color="primary" clipped-left>
         <v-spacer></v-spacer>
         <v-toolbar-title>Cryptography Project</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-app-bar>
 
-      <v-navigation-drawer app class="sidebar">
+      <v-navigation-drawer app class="sidebar" clipped>
         <v-list>
           <v-list-item v-for="link in links" :key="link" link router :to="link.route" >
             <v-list-item-content>
