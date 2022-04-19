@@ -7,18 +7,14 @@
         auto-grow
         label="Input plain text"
         class="mx-4 mt-4"
-        :value="this.value.text"
-        @change="(e) => InputText(e)"
-        :name = "text"
+        v-model="this.value.text"
       ></v-textarea>
       <v-textarea
         filled
         auto-grow
         label="Input key value"
         class="mx-4"
-        :value="this.value.key"
-        @change="(e) => InputText(e)"
-        :name = "key" 
+        v-model="this.value.key"
       ></v-textarea>
       <v-textarea
         filled
@@ -36,6 +32,7 @@
         </v-btn>
       </v-row>
     </v-card>
+    <img :src="image">
   </div>
 </template>
 
@@ -44,6 +41,7 @@ import {HTTP} from '@/axios.js'
 export default {
   data() {
     return {
+      image: '',
       value: {      
         text: "",
         key:""
@@ -52,15 +50,24 @@ export default {
   },
   methods: {
     async postValue() {
-      let res = await HTTP.post("/ColumnarTransposition/encrypt", this.value);
-      console.log(res);
-    },
-    InputText(e){
-      debugger
-      console.log(e.target.name);
-      Object.assign(this.value, {
-        [e.target.name] : e.target.value
+      await HTTP.get('api/breeds/image/random')
+      .then(res => {
+      if (res.data.status == 'success') {
+      this.image = res.data.message
+      console.log(this.image);
+      }
+      })
+      .catch(e => {
+      console.log(e);
       });
+      // let getnaja = await HTTP.get("/");
+      // let res = await HTTP.post("/ColumnarTransposition/encrypt", this.value);
+      // console.log(getnaja);
+      // console.log(res);
+    },
+    PostText(e){
+      debugger
+      console.log(e.target.value);
     }
   },
 };
