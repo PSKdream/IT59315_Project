@@ -17,6 +17,6 @@ class KeySize(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "keySize": 256,
+                "keySize": 1024,
             }
         }

@@ -7,12 +7,18 @@
         auto-grow
         label="Input plain text"
         class="mx-4 mt-4"
+        :value="this.value.text"
+        @change="(e) => InputText(e)"
+        :name = "text"
       ></v-textarea>
       <v-textarea
         filled
         auto-grow
         label="Input key value"
         class="mx-4"
+        :value="this.value.key"
+        @change="(e) => InputText(e)"
+        :name = "key" 
       ></v-textarea>
       <v-textarea
         filled
@@ -22,7 +28,7 @@
         disabled
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
-        <v-btn class="mr-4 white--text encrypt" width="265" height="50">
+        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValue()">
           Encrypt
         </v-btn>
         <v-btn class="mr-4 white--text decrypt" width="265" height="50">
@@ -38,22 +44,24 @@ import {HTTP} from '@/axios.js'
 export default {
   data() {
     return {
-      text: "",
-      value:"",
+      value: {      
+        text: "",
+        key:""
+      }
     };
   },
   methods: {
-    async postText() {
-      await HTTP.post("api/breeds/image/random")
-        .then((res) => {
-          if (res.data.status == "success") {
-            this.image = res.data.message;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    async postValue() {
+      let res = await HTTP.post("/ColumnarTransposition/encrypt", this.value);
+      console.log(res);
     },
+    InputText(e){
+      debugger
+      console.log(e.target.name);
+      Object.assign(this.value, {
+        [e.target.name] : e.target.value
+      });
+    }
   },
 };
 </script>

@@ -5,6 +5,9 @@
       <v-textarea
         filled
         auto-grow
+        :counter="200"
+        :rules="inputRules"
+
         label="Input plain text"
         class="mx-4 mt-4"
       ></v-textarea>
@@ -34,5 +37,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      inputRules: [
+          v => (v || '' ).length <= 200 || 'Plain text must be 200 characters or less.'
+      ]
+    }
+  },
+};
 </script>
