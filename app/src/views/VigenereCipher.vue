@@ -19,26 +19,8 @@
         auto-grow
         label="Result"
         class="mx-4"
-        disabled
+        readonly
       ></v-textarea>
-      <!-- <v-text-field
-        v-model="name"
-        :rules="nameRules"
-        label="Input plain text"
-        class="mx-4"
-        required
-      ></v-text-field>
-      <v-text-field
-        label="Input key value"
-        class="mx-4"
-        required
-      ></v-text-field>
-      <v-text-field
-        label="Result"
-        class="mx-4"
-        filled
-        disabled
-      ></v-text-field> -->
       <v-row class="ml-4 my-auto mb-4">
         <v-btn class="mr-4 white--text encrypt" width="265" height="50">
           Encrypt

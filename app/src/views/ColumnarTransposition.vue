@@ -19,7 +19,7 @@
         auto-grow
         label="Result"
         class="mx-4"
-        disabled
+        readonly
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
         <v-btn class="mr-4 white--text encrypt" width="265" height="50">
@@ -39,12 +39,12 @@ export default {
   data() {
     return {
       text: "",
-      value:"",
+      key:"",
     };
   },
   methods: {
-    async getImage() {
-      await HTTP.get("api/breeds/image/random")
+    async postText() {
+      await HTTP.get("/ColumnarTransposition/encrypt")
         .then((res) => {
           if (res.data.status == "success") {
             this.image = res.data.message;
