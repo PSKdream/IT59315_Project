@@ -1,34 +1,31 @@
 <template>
-  <div class="UnknownChpher mt-4">
-    <h1 class="text-center">Rail Fence Cipher</h1>
-    <v-card elevation="4" max-width="600" class="mx-auto my-4 pa-3">
+  <div class="UnknownChpher pa-3">
+    <h1 class="text-center my-5">Rail Fence Cipher</h1>
+    <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto pa-4">
       <v-textarea
-          filled
-          auto-grow
-          label="Input plain text"
-          class="mx-4 mt-4"
-          @change="(e) => inputText(e)"
+        filled
+        auto-grow
+        label="Input plain text"
+        @change="(e) => inputText(e)"
       ></v-textarea>
       <v-textarea
-          filled
-          auto-grow
-          label="Input key value"
-          class="mx-4"
-          @change="(e) => inputKey(e)"
+        filled
+        auto-grow
+        label="Input key value"
+        @change="(e) => inputKey(e)"
       ></v-textarea>
       <v-textarea
-          filled
-          auto-grow
-          label="Result"
-          class="mx-4"
-          readonly
-          :value = this.textcipher
+        filled
+        auto-grow
+        label="Result"
+        readonly
+        :value = this.textcipher
       ></v-textarea>
-      <v-row class="ml-4 my-auto mb-4">
-        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValue()">
+      <v-row class="mx-auto pb-4 justify-space-between">
+        <v-btn class="white--text encrypt" width="48.5%" height="50" @click="() => postValue()">
           Encrypt
         </v-btn>
-        <v-btn class="mr-4 white--text decrypt" width="265" height="50">
+        <v-btn class="white--text decrypt" width="48.5%" height="50">
           Decrypt
         </v-btn>
       </v-row>

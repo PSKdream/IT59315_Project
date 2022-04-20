@@ -1,15 +1,22 @@
 <template>
     <v-app>
-      <v-app-bar app class="align-center" color="primary" clipped-left>
-        <v-spacer></v-spacer>
+      <v-app-bar app color="primary" clipped-left height="64">
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>Cryptography Project</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-app-bar>
 
-      <v-navigation-drawer app class="sidebar" clipped>
-        <v-list>
-          <v-list-item v-for="link in links" :key="link" link router :to="link.route" >
-            <v-list-item-content>
+      <v-navigation-drawer app class="sidebar" clipped v-model="drawer"
+        temporary width="284" height="100%">
+        <v-list shaped>
+          <v-list-item class="mb-2">
+            <v-icon class="primary--text" @click="drawer = false">mdi-chevron-left</v-icon>
+            <v-spacer></v-spacer>
+            <v-toolbar-title class=" primary--text">Cryptography Project</v-toolbar-title>
+          </v-list-item>
+          <v-divider class="my-2 mx-4 primary"></v-divider>
+          <v-list-item v-for="link in links" :key="link" link router :to="link.route" active-class="primary--text text--accent-4 mx-4">
+            <v-list-item-content >
               <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -31,6 +38,7 @@ export default {
       { text: "Rail Fence Cipher", route: "/UnknownChpher" },
       { text: "RSA", route: "/RSA" },
     ],
+    drawer: false,
   }),
 };
 </script>
