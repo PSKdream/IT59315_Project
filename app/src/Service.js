@@ -15,15 +15,56 @@ class PostService {
             }
         });
     }
-
-    static postColumnar() {
+    static postColumnarEncryp(temdata) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.post(url + "ColumnarTransposition/encrypt", {
-                    "text": "buffalo view",
-                    "key": "2,3,1"
-                },
+                const res = await axios.post(url + "ColumnarTransposition/encrypt", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postColumnarDecryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "ColumnarTransposition/decrypt", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postVigenereEncryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "Vigenere/encrypt", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postVigenereDecryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "Vigenere/decrypt", temdata
                 // axiosConfig
                 );
                 const data = res.data;

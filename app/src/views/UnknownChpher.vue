@@ -7,12 +7,14 @@
           auto-grow
           label="Input plain text"
           class="mx-4 mt-4"
+          @change="(e) => inputText(e)"
       ></v-textarea>
       <v-textarea
           filled
           auto-grow
           label="Input key value"
           class="mx-4"
+          @change="(e) => inputKey(e)"
       ></v-textarea>
       <v-textarea
           filled
@@ -20,6 +22,7 @@
           label="Result"
           class="mx-4"
           readonly
+          :value = this.textcipher
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
         <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValue()">
@@ -39,23 +42,30 @@ import PostService from '../Service.js'
 export default {
   data() {
     return {
-      test: '',
       value: {
         text: "",
         key: ""
-      }
+      },
+      textcipher: ""
     };
   },
   methods: {
     async postValue() {
+      console.log(this.value);
       try {
-        this.course = await PostService.postColumnar();
-        console.log(this.course);
+        debugger
+        this.textcipher = await PostService.postColumnarEncryp(this.value);
       } catch (err) {
         this.error = err;
         console.log(err);
       }
     },
+    inputText(e){
+      this.value.text = e
+    },
+    inputKey(e){
+      this.value.key = e
+    }
   }
 };
 </script>

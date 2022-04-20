@@ -1,33 +1,34 @@
 <template>
-  <div class="ColumnarTransposition mt-4">
+  <div class="UnknownChpher mt-4">
     <h1 class="text-center">Columnar Transposition</h1>
     <v-card elevation="4" max-width="600" class="mx-auto my-4 pa-3">
       <v-textarea
-        filled
-        auto-grow
-        label="Input plain text"
-        class="mx-4 mt-4"
-        v-model="this.value.text"
+          filled
+          auto-grow
+          label="Input plain text"
+          class="mx-4 mt-4"
+          @change="(e) => inputText(e)"
       ></v-textarea>
       <v-textarea
-        filled
-        auto-grow
-        label="Input key value"
-        class="mx-4"
-        v-model="this.value.key"
+          filled
+          auto-grow
+          label="Input key value"
+          class="mx-4"
+          @change="(e) => inputKey(e)"
       ></v-textarea>
       <v-textarea
-        filled
-        auto-grow
-        label="Result"
-        class="mx-4"
-        readonly
+          filled
+          auto-grow
+          label="Result"
+          class="mx-4"
+          readonly
+          :value = this.textcipher
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
-        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValue()">
+        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValueEn()">
           Encrypt
         </v-btn>
-        <v-btn class="mr-4 white--text decrypt" width="265" height="50">
+        <v-btn class="mr-4 white--text decrypt" width="265" height="50" @click="() => postValueDe()">
           Decrypt
         </v-btn>
       </v-row>
@@ -36,22 +37,43 @@
 </template>
 
 <script>
+import PostService from '../Service.js'
+
 export default {
   data() {
     return {
-      value: {      
+      value: {
         text: "",
-        key:""
-      }
+        key: ""
+      },
+      textcipher: ""
     };
   },
   methods: {
-    async postValue() {
+    async postValueEn() {
+      console.log(this.value);
+      try {
+        this.textcipher = await PostService.postColumnarEncryp(this.value);
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
     },
-    PostText(e){
-      debugger
-      console.log(e.target.value);
+    inputText(e){
+      this.value.text = e
+    },
+    inputKey(e){
+      this.value.key = e
+    },
+    async postValueDe() {
+      console.log(this.value);
+      try {
+        this.textcipher = await PostService.postColumnarDecryp(this.value);
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
     }
-  },
+  }
 };
 </script>
