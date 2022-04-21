@@ -104,6 +104,51 @@ class PostService {
             }
         });
     }
+
+    static postRSAGen(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "RSA/GenerateKey", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postRSAEncryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "RSA/encryp", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postRSADecryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "RSA/decryp", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
 }
 
 export default PostService;
