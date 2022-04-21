@@ -21,6 +21,12 @@
         readonly
         :value = this.textcipher
       ></v-textarea>
+      <v-row class="mx-auto mb-4">
+        <v-spacer></v-spacer>
+        <v-btn @click="copyResult">
+              copy
+        </v-btn>
+      </v-row>
       <v-row class="mx-auto pb-4 justify-space-between">
         <v-btn class="white--text encrypt" width="48.5%" height="50" @click="() => postValueEn()">
           Encrypt
@@ -70,6 +76,9 @@ export default {
         this.error = err;
         console.log(err);
       }
+    },
+    copyResult() {
+      navigator.clipboard.writeText(this.textcipher);
     }
   }
 };
