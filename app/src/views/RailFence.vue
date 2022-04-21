@@ -1,5 +1,5 @@
 <template>
-  <div class="UnknownChpher mt-4">
+  <div class="RailFence mt-4">
     <h1 class="text-center">Rail Fence Cipher</h1>
     <v-card elevation="4" max-width="600" class="mx-auto my-4 pa-3">
       <v-textarea
@@ -25,10 +25,10 @@
           :value = this.textcipher
       ></v-textarea>
       <v-row class="ml-4 my-auto mb-4">
-        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValue()">
+        <v-btn class="mr-4 white--text encrypt" width="265" height="50" @click="() => postValueEn()">
           Encrypt
         </v-btn>
-        <v-btn class="mr-4 white--text decrypt" width="265" height="50">
+        <v-btn class="mr-4 white--text decrypt" width="265" height="50" @click="() => postValueDe()">
           Decrypt
         </v-btn>
       </v-row>
@@ -50,11 +50,10 @@ export default {
     };
   },
   methods: {
-    async postValue() {
+    async postValueEn() {
       console.log(this.value);
       try {
-        debugger
-        this.textcipher = await PostService.postColumnarEncryp(this.value);
+        this.textcipher = await PostService.postRailFenceEncryp(this.value);
       } catch (err) {
         this.error = err;
         console.log(err);
@@ -65,6 +64,15 @@ export default {
     },
     inputKey(e){
       this.value.key = e
+    },
+    async postValueDe() {
+      console.log(this.value);
+      try {
+        this.textcipher = await PostService.postRailFenceDecryp(this.value);
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
     }
   }
 };

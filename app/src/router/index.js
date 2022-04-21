@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ColumnarTransposition from '../views/ColumnarTransposition.vue'
 import VigenereCipher from '../views/VigenereCipher'
-import UnknownChpher from '../views/UnknownChpher'
+import RailFence from '../views/RailFence'
 import RSA from '../views/RSA'
 
 Vue.use(VueRouter)
@@ -19,9 +19,9 @@ const routes = [
     component: VigenereCipher
   },
   {
-    path: '/UnknownChpher',
-    name: 'UnknownChpher',
-    component: UnknownChpher
+    path: '/RailFence',
+    name: 'RailFence',
+    component: RailFence
   },
   {
     path: '/RSA',

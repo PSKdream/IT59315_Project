@@ -74,6 +74,36 @@ class PostService {
             }
         });
     }
+
+    static postRailFenceEncryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "RailFence/encrypt", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    static postRailFenceDecryp(temdata) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.post(url + "RailFence/decrypt", temdata
+                // axiosConfig
+                );
+                const data = res.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
 }
 
 export default PostService;
