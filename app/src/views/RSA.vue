@@ -1,7 +1,7 @@
 <template>
   <div class="RSA">
     <v-container>
-      <h1 class="text-center my-4">RSA Encryption</h1>
+      <h1 class="text-center my-4">RSA Cipher</h1>
       <v-card
         rounded="lg"
         elevation="12"
@@ -15,7 +15,7 @@
           placeholder="Key Size (Bit)"
           v-model="item"
         ></v-select>
-        <v-btn class="white--text font-weight-black gnrkey mb-3" height="50" @click="() => ChoosItem()">
+        <v-btn class="white--text font-weight-black gnrkey mb-3" height="50" @click="() => ChoosItem()" :loading="loading">
           Generate Key Pair
         </v-btn>
         <v-row class="mx-auto my-1">
@@ -101,6 +101,7 @@ export default {
       genkey: "",
       items: ["512", "1024", "2048", "4096"],
       item: "",
+      loading: false,
     };
   },
   methods: {
@@ -135,11 +136,14 @@ export default {
     // },
     async ChoosItem() {
       console.log(this.genkey);
+      this.loading = true;
       try {
         this.genkey = await PostService.postRSAGen({ keySize: this.item });
+        this.loading = false;
       } catch (err) {
         this.error = err;
         console.log(err);
+        this.loading = false;
       }
     },
     copyResult() {
