@@ -2,7 +2,22 @@
   <div class="RSA">
     <v-container>
       <h1 class="text-center my-4">RSA Encryption</h1>
-      <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto mb-4 pa-4">
+      <v-card
+        rounded="lg"
+        elevation="12"
+        max-width="600"
+        class="mx-auto mb-4 pa-4"
+      >
+        <h2 class="my-3">Select Key Size (Bit)</h2>
+        <v-select
+          :items="items"
+          outlined
+          placeholder="Key Size (Bit)"
+          v-model="item"
+        ></v-select>
+        <v-btn class="white--text font-weight-black gnrkey mb-3" height="50" @click="() => ChoosItem()">
+          Generate Key Pair
+        </v-btn>
         <v-row class="mx-auto my-1">
           <h2 class="my-2">Public Key</h2>
           <v-spacer></v-spacer>
@@ -14,6 +29,7 @@
           outlined
           auto-grow
           placeholder="Public key will appear here."
+          :value = this.genkey.public_key
           readonly
         ></v-textarea>
         <v-row class="mx-auto my-1">
@@ -27,38 +43,26 @@
           outlined
           auto-grow
           placeholder="Private key will appear here."
+          :value = this.genkey.private_key
           readonly
         ></v-textarea>
-        <h2 class="mb-2">Select Key Size (Bit)</h2>
-        <v-select
-          :items="items"
-          outlined
-          placeholder="Key Size (Bit)"
-          v-model="item"
-          @change="() => ChoosItem()"
-        ></v-select>
-        <v-btn class="white--text gnrkey" height="50">
-          Generate Key Pair
-        </v-btn>
-        <v-divider class="grey my-6"></v-divider>
+        <v-divider class="grey mt-2 mb-6"></v-divider>
         <h2 class="mb-3">Enter Plain/Cipher Text</h2>
         <v-textarea
           outlined
           auto-grow
-          :counter="200"
-          :rules="inputRules"
           placeholder="Enter text here."
           @change="(e) => inputText(e)"
         ></v-textarea>
         <h2 class="mb-3">Enter Public/Private Key</h2>
         <v-textarea
           outlined
-          auto-grow 
+          auto-grow
           placeholder="Paste key here."
           @change="(e) => inputKey(e)"
         ></v-textarea>
         <v-row class="mx-auto my-1">
-          <h2 class="mb-2">Result</h2> 
+          <h2 class="mb-2">Result</h2>
           <v-spacer></v-spacer>
           <v-btn icon @click="copyResult">
             <v-icon>mdi-content-copy</v-icon>
@@ -66,29 +70,16 @@
         </v-row>
         <v-textarea
           outlined
-          auto-grow 
+          auto-grow
           placeholder="Result will appear here."
-          :value = this.textcipher
+          :value="this.textcipher"
           readonly
         ></v-textarea>
-        <!-- <v-textarea
-          outlined
-          auto-grow
-          label="Input key value"
-          @change="(e) => inputKey(e)"
-        ></v-textarea>
-        <v-textarea
-          outlined
-          auto-grow
-          label="Result"
-          readonly
-          class="mb-3"
-        ></v-textarea> -->
         <v-row-flex class="mx-auto">
-          <v-btn class="white--text encrypt" height="50">
+          <v-btn class="white--text font-weight-black encrypt" height="50" @click="() => postValueEn()">
             Encrypt
           </v-btn>
-          <v-btn class="white--text decrypt mx-2" height="50">
+          <v-btn class="white--text font-weight-black decrypt mx-2" height="50" @click="() => postValueDe()">
             Decrypt
           </v-btn>
         </v-row-flex>
@@ -98,21 +89,19 @@
 </template>
 
 <script>
-import PostService from '../Service.js'
+import PostService from "../Service.js";
 export default {
   data() {
     return {
       value: {
         text: "",
-        key: ""
+        key: "",
       },
       textcipher: "",
-      inputRules: [
-          v => (v || '' ).length <= 200 || 'Text must be 200 characters or less.'
-      ],
-      items: ['512', '1024', '2048', '4096'],
-      item: ""
-    }
+      genkey: "",
+      items: ["512", "1024", "2048", "4096"],
+      item: "",
+    };
   },
   methods: {
     async postValueEn() {
@@ -124,11 +113,11 @@ export default {
         console.log(err);
       }
     },
-    inputText(e){
-      this.value.text = e
+    inputText(e) {
+      this.value.text = e;
     },
-    inputKey(e){
-      this.value.key = e
+    inputKey(e) {
+      this.value.key = e;
     },
     async postValueDe() {
       console.log(this.value);
@@ -139,14 +128,23 @@ export default {
         console.log(err);
       }
     },
-    async ChoosItem(){
-      console.log(this.item);
-      let genkey = await PostService.postRSAGen({"keySize":this.item});
-      console.log(genkey);
+    // async ChoosItem() {
+    //   console.log(this.item);
+    //   let genkey = await PostService.postRSAGen({ keySize: this.item });
+    //   console.log(genkey);
+    // },
+    async ChoosItem() {
+      console.log(this.genkey);
+      try {
+        this.genkey = await PostService.postRSAGen({ keySize: this.item });
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
     },
     copyResult() {
       navigator.clipboard.writeText(this.textcipher);
-    }
-  }
+    },
+  },
 };
 </script>

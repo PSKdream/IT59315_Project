@@ -124,7 +124,7 @@ class PostService {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.post(url + "RSA/encryp", temdata
+                const res = await axios.post(url + "RSA/encrypt", temdata
                 // axiosConfig
                 );
                 const data = res.data;
@@ -139,7 +139,7 @@ class PostService {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.post(url + "RSA/decryp", temdata
+                const res = await axios.post(url + "RSA/decrypt", temdata
                 // axiosConfig
                 );
                 const data = res.data;
