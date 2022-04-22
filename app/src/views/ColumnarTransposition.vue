@@ -3,7 +3,7 @@
     <v-container>
       <h1 class="text-center my-4">Columnar Transposition Cipher</h1>
       <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto mb-4 pa-4">
-        <h2 class="my-3">Enter Plain / Cipher Text</h2>
+        <h2 class="my-3">Enter Plain/Cipher Text</h2>
         <v-textarea
           outlined
           auto-grow
