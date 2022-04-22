@@ -21,7 +21,7 @@
         <v-row class="mx-auto my-1">
           <h2 class="my-2">Public Key</h2>
           <v-spacer></v-spacer>
-          <v-btn icon class="mt-2">
+          <v-btn icon class="mt-2" @click="copyPublic">
             <v-icon>mdi-content-copy</v-icon>
           </v-btn>
         </v-row>
@@ -35,7 +35,7 @@
         <v-row class="mx-auto my-1">
           <h2 class="mb-2">Private Key</h2>
           <v-spacer></v-spacer>
-          <v-btn icon>
+          <v-btn icon @click="copyPrivate">
             <v-icon>mdi-content-copy</v-icon>
           </v-btn>
         </v-row>
@@ -72,7 +72,7 @@
           outlined
           auto-grow
           placeholder="Result will appear here."
-          :value="this.textcipher"
+          :value=this.textcipher
           readonly
         ></v-textarea>
         <v-row-flex class="mx-auto">
@@ -145,6 +145,12 @@ export default {
     copyResult() {
       navigator.clipboard.writeText(this.textcipher);
     },
+    copyPrivate() {
+      navigator.clipboard.writeText(this.genkey.private_key);
+    },
+    copyPublic() {
+      navigator.clipboard.writeText(this.genkey.public_key);
+    }
   },
 };
 </script>
