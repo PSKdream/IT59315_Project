@@ -7,7 +7,7 @@
       </v-app-bar>
 
       <v-navigation-drawer app class="sidebar" clipped v-model="drawer"
-        temporary width="284" height="100%">
+        temporary width="296" height="100%">
         <v-list shaped>
           <v-list-item class="mb-2">
             <v-icon class="primary--text" @click="drawer = false">mdi-chevron-left</v-icon>
@@ -33,7 +33,7 @@
 export default {
   data: () => ({
     links: [
-      { text: "Columnar Transposition", route: "/" },
+      { text: "Columnar Transposition Cipher", route: "/" },
       { text: "Vigenere Cipher", route: "/VigenereCipher" },
       { text: "Rail Fence Cipher", route: "/RailFence" },
       { text: "RSA", route: "/RSA" },

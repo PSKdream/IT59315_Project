@@ -11,6 +11,7 @@ export default new Vuetify({
           secondary: '#b0bec5',
           decrypt: '#FF4D4D',
           encrypt: '#0061BB',
+          gnrkey: '#00a564',
           sidebar: '#45413B',
         },
       },
