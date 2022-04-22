@@ -2,7 +2,7 @@
   <div class="UnknownChpher">
     <v-container>
       <h1 class="text-center my-4">Columnar Transposition Cipher</h1>
-      <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto mb-4 pa-4">
+      <v-card rounded="lg" elevation="12" max-width="600" class="mx-auto mb-4 pa-4">
         <h2 class="my-3">Enter Plain/Cipher Text</h2>
         <v-textarea
           outlined
@@ -32,10 +32,10 @@
           readonly
         ></v-textarea>
         <v-row-flex class="mx-auto">
-          <v-btn class="white--text encrypt" height="50" @click="() => postValueEn()">
+          <v-btn class="white--text font-weight-black encrypt" height="50" @click="() => postValueEn()">
             Encrypt
           </v-btn>
-          <v-btn class="white--text decrypt mx-2" height="50" @click="() => postValueDe()">
+          <v-btn class="white--text font-weight-black decrypt mx-2" height="50" @click="() => postValueDe()">
             Decrypt
           </v-btn>
         </v-row-flex>

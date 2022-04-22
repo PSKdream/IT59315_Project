@@ -2,7 +2,18 @@
   <div class="RSA">
     <v-container>
       <h1 class="text-center my-4">RSA Encryption</h1>
-      <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto mb-4 pa-4">
+      <v-card rounded="lg" elevation="12" max-width="600" class="mx-auto mb-4 pa-4">
+        <h2 class="my-3">Select Key Size (Bit)</h2>
+        <v-select
+          :items="items"
+          outlined
+          placeholder="Key Size (Bit)"
+          v-model="item"
+          @change="() => ChoosItem()"
+        ></v-select>
+        <v-btn class="white--text font-weight-black gnrkey mb-3" height="50">
+          Generate Key Pair
+        </v-btn>
         <v-row class="mx-auto my-1">
           <h2 class="my-2">Public Key</h2>
           <v-spacer></v-spacer>
@@ -29,18 +40,7 @@
           placeholder="Private key will appear here."
           readonly
         ></v-textarea>
-        <h2 class="mb-2">Select Key Size (Bit)</h2>
-        <v-select
-          :items="items"
-          outlined
-          placeholder="Key Size (Bit)"
-          v-model="item"
-          @change="() => ChoosItem()"
-        ></v-select>
-        <v-btn class="white--text gnrkey" height="50">
-          Generate Key Pair
-        </v-btn>
-        <v-divider class="grey my-6"></v-divider>
+        <v-divider class="grey mt-2 mb-6"></v-divider>
         <h2 class="mb-3">Enter Plain/Cipher Text</h2>
         <v-textarea
           outlined
@@ -85,10 +85,10 @@
           class="mb-3"
         ></v-textarea> -->
         <v-row-flex class="mx-auto">
-          <v-btn class="white--text encrypt" height="50">
+          <v-btn class="white--text font-weight-black encrypt" height="50">
             Encrypt
           </v-btn>
-          <v-btn class="white--text decrypt mx-2" height="50">
+          <v-btn class="white--text font-weight-black decrypt mx-2" height="50">
             Decrypt
           </v-btn>
         </v-row-flex>

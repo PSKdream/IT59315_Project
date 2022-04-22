@@ -13,6 +13,7 @@ export default new Vuetify({
           encrypt: '#0061BB',
           gnrkey: '#00a564',
           sidebar: '#45413B',
+          sidebar2: '#211409',
         },
       },
     },
