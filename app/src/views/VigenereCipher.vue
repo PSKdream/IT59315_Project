@@ -1,8 +1,10 @@
 <template>
   <div class="UnknownChpher">
+    <particleBG></particleBG>
     <v-container>
-      <h1 class="text-center my-4">Vigenere Cipher</h1>
       <v-card rounded="lg" elevation="12" max-width="600" class="mx-auto mb-4 pa-4">
+        <h1 class="text-center my-4">Vigenere Cipher</h1>
+        <v-divider class="grey mt-2 mb-6"></v-divider>
         <h2 class="my-3">Enter Plain/Cipher Text</h2>
         <v-textarea
           outlined
@@ -46,8 +48,10 @@
 
 <script>
 import PostService from '../Service.js'
+import particleBG from "../components/particleBG.vue";
 
 export default {
+  components: {particleBG},
   data() {
     return {
       value: {
