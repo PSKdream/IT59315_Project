@@ -30,7 +30,7 @@
         <v-textarea
           outlined
           auto-grow
-          placeholder="Public key will appear here."
+          placeholder="The public key will be shown here."
           :value = this.genkey.public_key
           readonly
         ></v-textarea>
@@ -44,7 +44,7 @@
         <v-textarea
           outlined
           auto-grow
-          placeholder="Private key will appear here."
+          placeholder="The private key will be shown here."
           :value = this.genkey.private_key
           readonly
         ></v-textarea>
@@ -73,7 +73,7 @@
         <v-textarea
           outlined
           auto-grow
-          placeholder="Result will appear here."
+          placeholder="The result will be shown here."
           :value=this.textcipher
           readonly
         ></v-textarea>

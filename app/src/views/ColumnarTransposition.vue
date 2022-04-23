@@ -29,7 +29,7 @@
         <v-textarea
           outlined
           auto-grow 
-          placeholder="Result will appear here."
+          placeholder="The result will be shown here."
           :value = this.textcipher
           readonly
         ></v-textarea>
