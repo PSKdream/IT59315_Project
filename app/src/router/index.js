@@ -7,24 +7,33 @@ import RSA from '../views/RSA'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Columnar Transposition',
     component: ColumnarTransposition
   },
   {
-    path: '/VigenereCipher',
+    path: '/app',
+    name: 'Columnar Transposition',
+    component: ColumnarTransposition
+  },
+  {
+    path: '/app/ColumnarTransposition',
+    name: 'Columnar Transposition',
+    component: ColumnarTransposition
+  },
+  {
+    path: '/app/VigenereCipher',
     name: 'VigenereCipher',
     component: VigenereCipher
   },
   {
-    path: '/RailFence',
+    path: '/app/RailFence',
     name: 'RailFence',
     component: RailFence
   },
   {
-    path: '/RSA',
+    path: '/app/RSA',
     name: 'RSA',
     component: RSA
   }

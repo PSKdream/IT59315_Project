@@ -33,10 +33,10 @@
 export default {
   data: () => ({
     links: [
-      { text: "Columnar Transposition", route: "/" },
-      { text: "Vigenere Cipher", route: "/VigenereCipher" },
-      { text: "Rail Fence Cipher", route: "/RailFence" },
-      { text: "RSA", route: "/RSA" },
+      { text: "Columnar Transposition", route: "/app/ColumnarTransposition" },
+      { text: "Vigenere Cipher", route: "/app/VigenereCipher" },
+      { text: "Rail Fence Cipher", route: "/app/RailFence" },
+      { text: "RSA", route: "/app/RSA" },
     ],
     drawer: false,
   }),
