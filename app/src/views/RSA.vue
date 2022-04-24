@@ -1,50 +1,164 @@
 <template>
-  <div class="RSA pa-3">
-    <h1 class="text-center my-5">RSA</h1>
-    <v-card rounded="lg" elevation="4" max-width="600" class="mx-auto pa-4">
-      <v-textarea
-        filled
-        auto-grow
-        :counter="200"
-        :rules="inputRules"
-        label="Input plain text"
-      ></v-textarea>
-      <v-select
-        :items="items"
-        filled
-        label="Key Size (Bits)"
-      ></v-select>
-      <v-textarea
-        filled
-        auto-grow
-        label="Input key value"
-      ></v-textarea>
-      <v-textarea
-        filled
-        auto-grow
-        label="Result"
-        readonly
-      ></v-textarea>
-      <v-row class="mx-auto pb-4 justify-space-between">
-        <v-btn class="white--text encrypt" width="48.5%" height="50">
-          Encrypt
+  <div class="RSA">
+    <particleBG></particleBG>
+    <v-container>
+      <v-card
+        rounded="lg"
+        elevation="12"
+        max-width="600"
+        class="mx-auto mb-4 pa-4"
+      >
+        <h1 class="text-center my-4">RSA Cipher</h1>
+        <v-divider class="grey mt-2 mb-6"></v-divider>
+        <h2 class="my-3">Select Key Size (Bit)</h2>
+        <v-select
+          :items="items"
+          outlined
+          placeholder="Key Size (Bit)"
+          v-model="item"
+        ></v-select>
+        <v-btn class="white--text font-weight-black gnrkey mb-3" height="50" @click="() => ChoosItem()" :loading="loading">
+          Generate Key Pair
         </v-btn>
-        <v-btn class="white--text decrypt" width="48.5%" height="50">
-          Decrypt
-        </v-btn>
-      </v-row>
-    </v-card>
+        <v-row class="mx-auto my-1">
+          <h2 class="my-2">Public Key</h2>
+          <v-spacer></v-spacer>
+          <v-btn icon class="mt-2" @click="copyPublic">
+            <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
+        </v-row>
+        <v-textarea
+          outlined
+          auto-grow
+          placeholder="The public key will be shown here."
+          :value = this.genkey.public_key
+          readonly
+        ></v-textarea>
+        <v-row class="mx-auto my-1">
+          <h2 class="mb-2">Private Key</h2>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="copyPrivate">
+            <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
+        </v-row>
+        <v-textarea
+          outlined
+          auto-grow
+          placeholder="The private key will be shown here."
+          :value = this.genkey.private_key
+          readonly
+        ></v-textarea>
+        <v-divider class="grey mt-2 mb-6"></v-divider>
+        <h2 class="mb-3">Enter Plain/Cipher Text</h2>
+        <v-textarea
+          outlined
+          auto-grow
+          placeholder="Enter text here."
+          @change="(e) => inputText(e)"
+        ></v-textarea>
+        <h2 class="mb-3">Enter Public/Private Key</h2>
+        <v-textarea
+          outlined
+          auto-grow
+          placeholder="Paste key here."
+          @change="(e) => inputKey(e)"
+        ></v-textarea>
+        <v-row class="mx-auto my-1">
+          <h2 class="mb-2">Result</h2>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="copyResult">
+            <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
+        </v-row>
+        <v-textarea
+          outlined
+          auto-grow
+          placeholder="The result will be shown here."
+          :value=this.textcipher
+          readonly
+        ></v-textarea>
+        <v-row-flex class="mx-auto">
+          <v-btn class="white--text font-weight-black encrypt" height="50" @click="() => postValueEn()">
+            Encrypt
+          </v-btn>
+          <v-btn class="white--text font-weight-black decrypt mx-2" height="50" @click="() => postValueDe()">
+            Decrypt
+          </v-btn>
+        </v-row-flex>
+      </v-card>
+    </v-container>
   </div>
 </template>
 
 <script>
+import PostService from "../Service.js";
+import particleBG from "../components/particleBG.vue";
+
 export default {
+  components: {particleBG},
   data() {
     return {
-      inputRules: [
-          v => (v || '' ).length <= 200 || 'Plain text must be 200 characters or less.'
-      ],
-      items: ['512', '1024', '2048', '4096'],
+      value: {
+        text: "",
+        key: "",
+      },
+      textcipher: "",
+      genkey: "",
+      items: ["512", "1024", "2048", "4096"],
+      item: "",
+      loading: false,
+    };
+  },
+  methods: {
+    async postValueEn() {
+      console.log(this.value);
+      try {
+        this.textcipher = await PostService.postRSAEncryp(this.value);
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
+    },
+    inputText(e) {
+      this.value.text = e;
+    },
+    inputKey(e) {
+      this.value.key = e;
+    },
+    async postValueDe() {
+      console.log(this.value);
+      try {
+        this.textcipher = await PostService.postRSADecryp(this.value);
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+      }
+    },
+    // async ChoosItem() {
+    //   console.log(this.item);
+    //   let genkey = await PostService.postRSAGen({ keySize: this.item });
+    //   console.log(genkey);
+    // },
+    async ChoosItem() {
+      console.log(this.genkey);
+      this.loading = true;
+      try {
+        this.genkey = await PostService.postRSAGen({ keySize: this.item });
+        this.loading = false;
+      } catch (err) {
+        this.error = err;
+        console.log(err);
+        this.loading = false;
+      }
+    },
+    copyResult() {
+      navigator.clipboard.writeText(this.textcipher);
+    },
+    copyPrivate() {
+      navigator.clipboard.writeText(this.genkey.private_key);
+    },
+    copyPublic() {
+      navigator.clipboard.writeText(this.genkey.public_key);
     }
   },
 };
